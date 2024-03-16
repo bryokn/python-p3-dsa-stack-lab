@@ -1,3 +1,4 @@
+import pytest
 from Stack import Stack
 
 class TestStack:
@@ -37,7 +38,9 @@ class TestStack:
         stk = Stack()
         assert(stk.isEmpty())
         assert(stk.size() == 0)
-        assert(stk.pop() == None)
+        #assert(stk.pop() == None)
+        with pytest.raises(IndexError):
+            stk.pop()
         stk.push(1)
         assert(not stk.isEmpty())
         assert(stk.size() == 1)
@@ -52,7 +55,8 @@ class TestStack:
         assert(stk.size() == 1)
         assert(stk.pop() == 1)
         stk.push(1)
-        stk.push(2)
+        with pytest.raises(ValueError):
+            stk.push(2)
         assert(stk.full())
         assert(stk.size() == 1)
         assert(stk.pop() == 1)
